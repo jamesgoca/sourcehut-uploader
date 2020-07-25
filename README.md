@@ -35,7 +35,7 @@ To run this project, execute:
 
 ## Screenshot
 
-
+![Image of sourcehut uploader](https://github.com/jamesgoca/sourcehut-uploader/blob/master/screenshot.png?raw=true)
 
 ## License
 
@@ -44,8 +44,3 @@ This project is licensed using an MIT license. See more information in [LICENSE.
 ## Authors
 
 - James Gallagher
-
-## Checklist
-
-- [ ] Finish README.md
-- [ ] Upload project screenshot
