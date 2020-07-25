@@ -4,6 +4,8 @@ Sourcehut uploader is a tool that uploads my projects to sourcehut.
 
 This project is part of my initiative to take control over my data and code.
 
+Read about the inspiration behind this project in my blog post ["Mirroring My Code To Sourcehut"](https://jamesg.app/2020/07/25/mirroring-my-code-to-sourcehut.html).
+
 ## Installation
 
 First, clone this repository:
