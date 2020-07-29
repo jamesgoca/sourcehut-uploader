@@ -8,18 +8,7 @@ load_dotenv()
 
 logging.basicConfig(filename="app.log", level=logging.DEBUG)
 
-cwd = os.getcwd()
-repos_folder = os.path.join(cwd, "repos")
-
-if os.path.isdir(repos_folder):
-	os.chdir(repos_folder)
-else:
-	os.mkdir(repos_folder)
-	os.chdir(repos_folder)
-
-repos_raw = requests.get("https://api.github.com/users/{}/repos".format(os.getenv("github_username")))
-
-repos = repos_raw.json()
+repos = sourcehut.initialize()
 
 user_choice = input(
 """
@@ -43,9 +32,7 @@ def create_repos():
 	print("Uploading your projects. This may take a while.")
 	for r in repos:
 		if r["fork"] == False:
-			repo_url = "https://github.com/" + os.getenv("github_username") + "/" + r["name"]
-			new_url = "git@git.sr.ht:~" + os.getenv("sourcehut_username") + "/" + r["name"]
-			folder = r["name"] + ".git/"
+			repo_url, new_url, folder = sourcehut.get_urls(r)
 
 			sourcehut.check_for_repo_on_sourcehut(r)
 
