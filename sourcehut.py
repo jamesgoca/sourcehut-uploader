@@ -6,6 +6,7 @@ load_dotenv()
 authentication = { "Authorization": "token {}".format(os.getenv("sourcehut_api_key")) }
 
 def create_new_repository(repo):
+	print(repo["private"])
 	data = {
 		"name": repo["name"],
 		"description": repo["description"],
@@ -23,6 +24,6 @@ def check_for_repo_on_sourcehut(repo):
 
 def retrieve_code_from_original(repo_url, new_url, folder):
 	os.chdir(folder)
-	os.system("git push --mirror " + new_url)
+	os.system("git push --mirror " + new_url + " >/dev/null 2>&1")
 
 	os.chdir("..")

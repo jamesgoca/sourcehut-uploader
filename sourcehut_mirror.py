@@ -17,7 +17,7 @@ else:
 	os.mkdir(repos_folder)
 	os.chdir(repos_folder)
 
-repos_raw = requests.get("https://api.github.com/users/jamesgoca/repos")
+repos_raw = requests.get("https://api.github.com/users/{}/repos".format(os.getenv("github_username")))
 
 repos = repos_raw.json()
 
@@ -52,14 +52,17 @@ def create_repos():
 			if os.path.isdir(folder):
 				if clone_new == True:
 					logging.debug("The repository {} exists. Skipping creation.".format(new_url))
+					print("The repository {} exists. Skipping creation.".format(new_url))
 				else:
 					sourcehut.retrieve_code_from_original(repo_url, new_url, folder)
 					logging.debug("Repository {} has been updated and uploaded to sourcehut.".format(r["name"]))
+					print("Repository {} has been updated and uploaded to sourcehut.".format(r["name"]))
 			else:
 				if clone_new == True:
 					logging.debug("The repository {} does not exist in your local working directory. Creating.".format(new_url))
-					os.system("git clone --bare " + repo_url)
+					os.system("git clone --bare " + repo_url + " >/dev/null 2>&1")
 					sourcehut.retrieve_code_from_original(repo_url, new_url, folder)
+					print("Repository {} has been created and uploaded to sourcehut.".format(r["name"]))
 					logging.debug("Repository {} has been created and uploaded to sourcehut.".format(r["name"]))
 				else:
 					logging.debug("The repository {} does not exist in your local working directory. Skipping.".format(new_url))
